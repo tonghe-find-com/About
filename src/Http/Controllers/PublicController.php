@@ -1,12 +1,12 @@
 <?php
 
-namespace TypiCMS\Modules\Events\Http\Controllers;
+namespace Tonghe\Modules\Abouts\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Events\Models\Event;
-use TypiCMS\Modules\Events\Services\Calendar;
+use Tonghe\Modules\Abouts\Models\Event;
+use Tonghe\Modules\Abouts\Services\Calendar;
 
 class PublicController extends BasePublicController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Events\Providers;
+namespace Tonghe\Modules\Abouts\Providers;
 
 use Eluceo\iCal\Component\Calendar as EluceoCalendar;
 use Eluceo\iCal\Component\Event as EluceoEvent;
@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Events\Composers\SidebarViewComposer;
-use TypiCMS\Modules\Events\Facades\Events;
-use TypiCMS\Modules\Events\Models\Event;
-use TypiCMS\Modules\Events\Services\Calendar;
+use Tonghe\Modules\Abouts\Composers\SidebarViewComposer;
+use Tonghe\Modules\Abouts\Facades\Events;
+use Tonghe\Modules\Abouts\Models\Event;
+use Tonghe\Modules\Abouts\Services\Calendar;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -62,7 +62,7 @@ class ModuleServiceProvider extends ServiceProvider
         /*
          * Calendar service
          */
-        $this->app->bind('TypiCMS\Modules\Events\Services\Calendar', function () {
+        $this->app->bind('Tonghe\Modules\Abouts\Services\Calendar', function () {
             return new Calendar(
                 new EluceoCalendar('TypiCMS'),
                 new EluceoEvent()

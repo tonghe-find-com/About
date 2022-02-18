@@ -1,10 +1,10 @@
 <?php
 
-namespace TypiCMS\Modules\Events\Services;
+namespace Tonghe\Modules\Abouts\Services;
 
 use Eluceo\iCal\Component\Calendar as ElucleoCalendar;
 use Eluceo\iCal\Component\Event as ElucleoEvent;
-use TypiCMS\Modules\Events\Models\Event;
+use Tonghe\Modules\Abouts\Models\Event;
 
 class Calendar
 {

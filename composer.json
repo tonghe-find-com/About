@@ -1,12 +1,8 @@
 {
-    "name": "typicms/events",
+    "name": "tonghe/about",
     "description": "",
     "license": "MIT",
     "authors": [
-        {
-            "name": "Samuel De Backer",
-            "email": "sdebacker@gmail.com"
-        }
     ],
     "require": {
         "eluceo/ical": "^0.16",
@@ -14,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "TypiCMS\\Modules\\Events\\": "src/"
+            "Tonghe\\Modules\\Abouts\\": "src/"
         }
     },
     "minimum-stability": "dev",

@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Events\Presenters;
+namespace Tonghe\Modules\Abouts\Presenters;
 
 use TypiCMS\Modules\Core\Presenters\Presenter;
 

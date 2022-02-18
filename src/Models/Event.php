@@ -1,6 +1,6 @@
 <?php
 
-namespace TypiCMS\Modules\Events\Models;
+namespace Tonghe\Modules\Abouts\Models;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Events\Presenters\ModulePresenter;
+use Tonghe\Modules\Abouts\Presenters\ModulePresenter;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
