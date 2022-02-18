@@ -26,6 +26,10 @@ class ModuleServiceProvider extends ServiceProvider
             __DIR__.'/../database/migrations/create_abouts_table.php.stub' => getMigrationFileName('create_abouts_table'),
         ], 'migrations');
 
+        $this->publishes([
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/abouts'),
+        ], 'views');
+
         AliasLoader::getInstance()->alias('Abouts', Abouts::class);
 
         // Observers
