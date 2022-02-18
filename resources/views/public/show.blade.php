@@ -1,53 +1,55 @@
-@extends('core::public.master')
+@extends('pages::public.master')
 
-@section('title', $model->title.' – '.__('Events').' – '.$websiteTitle)
-@section('ogTitle', $model->title)
-@section('description', $model->summary)
-@section('ogImage', $model->present()->image(1200, 630))
-@section('bodyClass', 'body-events body-event-'.$model->id.' body-page body-page-'.$page->id)
+@section('title',$page->meta_title==""?$page->title:$page->meta_title)
+@section('keywords',$page->meta_keywords)
+@section('description',$page->meta_description)
+
+@push('css')
+    <!-- $$$ Single CSS $$$ -->
+    <link rel="stylesheet" href="/project/css/wrapper.min.css">
+@endpush
+
+@push('js')
+    <!-- $$$ Single JS $$$ -->
+    <script defer src=""></script>
+    <script>
+        $currentpage = "ABOUT"
+    </script>
+@endpush
 
 @section('content')
+<section>
 
-<article class="event">
-    <header class="event-header">
-        <div class="event-header-container">
-            <div class="event-header-navigator">
-                @include('core::public._items-navigator', ['module' => 'Events', 'model' => $model])
-            </div>
-            <h1 class="event-title">{{ $model->title }}</h1>
-            <div class="event-date">{{ $model->present()->dateFromTo }}</div>
-            <a class="btn btn-light btn-xs" href="{{ route($lang.'::event-ics', $model->slug) }}">
-                @lang('Add to calendar')
-            </a>
-            <div class="event-location">
-                <span class="event-venue">{{ $model->venue }}</span>
-                <div class="event-address">{!! nl2br($model->address) !!}</div>
-            </div>
-            @empty(!$model->url)
-            <div class="event-url"><a href="{{ $model->url }}" target="_blank" rel="noopener noreferrer">{{ parse_url($model->url, PHP_URL_HOST) }}</a></div>
-            @endempty
+    <nav aria-label="breadcrumb" class="breadcrumbrow">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ TypiCMS::homeUrl() }}"><i class="fas fa-home"></i>{{ Pages::getHomeTitle() }}</a></li>
+                <li aria-current="page" class="breadcrumb-item active">{{$page->title}}</li>
+            </ol>
         </div>
-    </header>
-    <div class="event-body">
-        @include('events::public._json-ld', ['event' => $model])
-        @empty(!$model->summary)
-        <p class="event-summary">{!! nl2br($model->summary) !!}</p>
-        @endempty
-        @include('core::public._share-links')
-        @empty(!$model->image)
-        <picture class="event-picture">
-            <img class="event-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
-            @empty(!$model->image->description)
-            <legend class="event-picture-legend">{{ $model->image->description }}</legend>
-            @endempty
-        </picture>
-        @endempty
-        @empty(!$model->body)
-        <div class="rich-content">{!! $model->present()->body !!}</div>
-        @endempty
-        @include('files::public._documents')
-        @include('files::public._images')
-    </div>
-</article>
+    </nav>
 
+    @include('template.banner',['page_name'=>'about'])
+
+    <div class="wrapper-about wrapper-A">
+        <div class="container">
+            <h1 class="heading">
+                {{$model->title}}
+            </h1>
+            <div class="block-about">
+                @if($model->body)
+                    {!! $model->body !!}
+                @else
+                <img src="/project/images/aboutpic1.png" alt="">
+                <br>
+                <p>
+                    東聖機械是台灣專業自動化工具機貿易商之一，代理多家台灣和日本知名設備工具機及自動化元件， 至今已邁入30 年，代理之日本傳動和連桿之汽機車, 精密零部件（洗切削、內外徑平面鏡面和汽缸研磨等），金屬機械加工生產設備供應商，及精密減速機（微型）齒輪、螺桿、軸承模具等機械加工自動化生產設備（車床、銑床、鑽孔攻牙、磨床、拉床等），及多家日本原材料、試驗機檢測設備裝置，超音波、渦流探傷、X光設限等各式無損探傷檢出設備，產品線繁不及備載。
+                </p>
+                @endif
+            </div>
+
+        </div>
+    </div>
+
+</section>
 @endsection
