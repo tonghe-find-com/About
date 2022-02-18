@@ -9,49 +9,47 @@ use Maatwebsite\Excel\Facades\Excel;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use Tonghe\Modules\Abouts\Exports\Export;
 use Tonghe\Modules\Abouts\Http\Requests\FormRequest;
-use Tonghe\Modules\Abouts\Models\Event;
+use Tonghe\Modules\Abouts\Models\About;
 
 class AdminController extends BaseAdminController
 {
     public function index(): View
     {
-        return view('events::admin.index');
+        return view('abouts::admin.index');
     }
 
     public function export(Request $request)
     {
-        $filename = date('Y-m-d').' '.config('app.name').' events.xlsx';
+        $filename = date('Y-m-d').' '.config('app.name').' abouts.xlsx';
 
-        return Excel::download(new Export(), $filename);
+        return Excel::download(new Export($request), $filename);
     }
 
     public function create(): View
     {
-        $model = new Event();
+        $model = new About();
 
-        return view('events::admin.create')
+        return view('abouts::admin.create')
             ->with(compact('model'));
     }
 
-    public function edit(Event $event): View
+    public function edit(about $about): View
     {
-        return view('events::admin.edit')
-            ->with(['model' => $event]);
+        return view('abouts::admin.edit')
+            ->with(['model' => $about]);
     }
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $event = Event::create($data);
+        $about = About::create($request->validated());
 
-        return $this->redirect($request, $event);
+        return $this->redirect($request, $about);
     }
 
-    public function update(Event $event, FormRequest $request): RedirectResponse
+    public function update(about $about, FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $event->update($data);
+        $about->update($request->validated());
 
-        return $this->redirect($request, $event);
+        return $this->redirect($request, $about);
     }
 }

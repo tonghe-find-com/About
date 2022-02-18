@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'events' => [
-        'read events' => 'Read',
-        'create events' => 'Create',
-        'update events' => 'Update',
-        'delete events' => 'Delete',
+    'abouts' => [
+        'read abouts' => 'Read',
+        'create abouts' => 'Create',
+        'update abouts' => 'Update',
+        'delete abouts' => 'Delete',
     ],
 ];

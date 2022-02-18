@@ -11,20 +11,21 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->date('start_date');
-            $table->date('end_date');
             $table->integer('image_id')->unsigned()->nullable();
             $table->json('status');
             $table->json('title');
             $table->json('slug');
-            $table->json('venue');
-            $table->json('address');
-            $table->json('summary');
             $table->json('body');
-            $table->json('website');
+            $table->integer('position')->unsigned()->default(0);//排序
+            /**
+             * SEO標籤
+             */
+            $table->json('meta_title');
+            $table->json('meta_keywords');
+            $table->json('meta_description');
             $table->timestamps();
         });
     }
@@ -34,6 +35,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::drop('abouts');
     }
 }

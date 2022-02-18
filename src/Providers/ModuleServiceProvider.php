@@ -2,71 +2,57 @@
 
 namespace Tonghe\Modules\Abouts\Providers;
 
-use Eluceo\iCal\Component\Calendar as EluceoCalendar;
-use Eluceo\iCal\Component\Event as EluceoEvent;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use Tonghe\Modules\Abouts\Composers\SidebarViewComposer;
-use Tonghe\Modules\Abouts\Facades\Events;
-use Tonghe\Modules\Abouts\Models\Event;
-use Tonghe\Modules\Abouts\Services\Calendar;
+use Tonghe\Modules\Abouts\Facades\Abouts;
+use Tonghe\Modules\Abouts\Models\About;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.events');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.abouts');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
-        config(['typicms.modules.events' => ['linkable_to_page']]);
-        config(['typicms.modules.events' => ['linkable_to_page']]);
+        $modules = $this->app['config']['typicms']['modules'];
+        $this->app['config']->set('typicms.modules', array_merge(['abouts' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'events');
+        $this->loadViewsFrom(null, 'abouts');
 
         $this->publishes([
-            __DIR__.'/../../database/migrations/create_events_table.php.stub' => getMigrationFileName('create_events_table'),
+            __DIR__.'/../database/migrations/create_abouts_table.php.stub' => getMigrationFileName('create_abouts_table'),
         ], 'migrations');
 
-        $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/events'),
-        ], 'views');
-
-        $this->publishes([
-            __DIR__.'/../../resources/scss' => resource_path('scss'),
-        ], 'resources');
-
-        AliasLoader::getInstance()->alias('Events', Events::class);
+        AliasLoader::getInstance()->alias('Abouts', Abouts::class);
 
         // Observers
-        Event::observe(new SlugObserver());
+        About::observe(new SlugObserver());
 
-        View::composer('core::admin._sidebar', SidebarViewComposer::class);
+        /*
+         * Sidebar view composer
+         */
+        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
          */
-        View::composer('events::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('events');
+        $this->app->view->composer('abouts::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('abouts');
         });
     }
 
-    public function register(): void
+    public function register()
     {
-        $this->app->register(RouteServiceProvider::class);
-
-        $this->app->bind('Events', Event::class);
+        $app = $this->app;
 
         /*
-         * Calendar service
+         * Register route service provider
          */
-        $this->app->bind('Tonghe\Modules\Abouts\Services\Calendar', function () {
-            return new Calendar(
-                new EluceoCalendar('TypiCMS'),
-                new EluceoEvent()
-            );
-        });
+        $app->register(RouteServiceProvider::class);
+
+        $app->bind('Abouts', About::class);
     }
 }

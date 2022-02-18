@@ -4,7 +4,7 @@ namespace Tonghe\Modules\Abouts\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Events extends Facade
+class Abouts extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Events extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Events';
+        return 'Abouts';
     }
 }

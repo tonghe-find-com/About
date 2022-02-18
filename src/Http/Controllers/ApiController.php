@@ -8,15 +8,15 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use Tonghe\Modules\Abouts\Models\Event;
+use Tonghe\Modules\Abouts\Models\About;
 
 class ApiController extends BaseApiController
 {
     public function index(Request $request): LengthAwarePaginator
     {
-        $data = QueryBuilder::for(Event::class)
-            ->selectFields($request->input('fields.events'))
-            ->allowedSorts(['status_translated', 'start_date', 'end_date', 'title_translated'])
+        $data = QueryBuilder::for(About::class)
+            ->selectFields($request->input('fields.abouts'))
+            ->allowedSorts(['status_translated', 'title_translated', 'position'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
             ])
@@ -26,23 +26,23 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Event $event, Request $request)
+    protected function updatePartial(About $about, Request $request)
     {
-        foreach ($request->only('status') as $key => $content) {
-            if ($event->isTranslatableAttribute($key)) {
+        foreach ($request->only('status', 'position') as $key => $content) {
+            if ($about->isTranslatableAttribute($key)) {
                 foreach ($content as $lang => $value) {
-                    $event->setTranslation($key, $lang, $value);
+                    $about->setTranslation($key, $lang, $value);
                 }
             } else {
-                $event->{$key} = $content;
+                $about->{$key} = $content;
             }
         }
 
-        $event->save();
+        $about->save();
     }
 
-    public function destroy(Event $event)
+    public function destroy(About $about)
     {
-        $event->delete();
+        $about->delete();
     }
 }

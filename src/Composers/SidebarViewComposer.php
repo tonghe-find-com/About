@@ -11,18 +11,18 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('read events')) {
+        if (Gate::denies('read abouts')) {
             return;
         }
         $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
             $group->id = 'content';
             $group->weight = 30;
-            $group->addItem(__('Events'), function (SidebarItem $item) {
-                $item->id = 'events';
-                $item->icon = config('typicms.events.sidebar.icon');
-                $item->weight = config('typicms.events.sidebar.weight');
-                $item->route('admin::index-events');
-                $item->append('admin::create-event');
+            $group->addItem(__('Abouts'), function (SidebarItem $item) {
+                $item->id = 'abouts';
+                $item->icon = config('typicms.abouts.sidebar.icon');
+                $item->weight = config('typicms.abouts.sidebar.weight');
+                $item->route('admin::index-abouts');
+                $item->append('admin::create-about');
             });
         });
     }

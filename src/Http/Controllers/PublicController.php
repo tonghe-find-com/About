@@ -2,72 +2,27 @@
 
 namespace Tonghe\Modules\Abouts\Http\Controllers;
 
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use Tonghe\Modules\Abouts\Models\Event;
-use Tonghe\Modules\Abouts\Services\Calendar;
+use Tonghe\Modules\Abouts\Models\About;
 
 class PublicController extends BasePublicController
 {
-    protected $calendar;
-
-    public function __construct(Calendar $calendar)
+    public function index()
     {
-        $this->calendar = $calendar;
-    }
-
-    public function index(): View
-    {
-        $models = Event::published()
-            ->with('image')
-            ->orderBy('start_date')
-            ->where('end_date', '>=', date('Y-m-d'))
-            ->paginate(config('typicms.events.per_page'));
-
-        return view('events::public.index')
-            ->with(compact('models'));
-    }
-
-    public function past(): View
-    {
-        $models = Event::published()
-            ->with('image')
-            ->orderBy('end_date', 'desc')
-            ->where('end_date', '<', date('Y-m-d'))
-            ->paginate(config('typicms.events.per_page'));
-
-        return view('events::public.past')
-            ->with(compact('models'));
+        $model = About::published()->orderBy('position', 'ASC')->first();
+        if($model){
+            return redirect($model->url());
+        }else{
+            return redirect()->back();
+        }
     }
 
     public function show($slug): View
     {
-        $model = Event::published()
-            ->with([
-                'image',
-                'images',
-                'documents',
-            ])
-            ->whereSlugIs($slug)
-            ->firstOrFail();
+        $model = About::published()->whereSlugIs($slug)->firstOrFail();
 
-        return view('events::public.show')
+        return view('abouts::public.show')
             ->with(compact('model'));
-    }
-
-    public function ics($slug): Response
-    {
-        $event = Event::published()
-            ->whereSlugIs($slug)
-            ->firstOrFail();
-
-        $this->calendar->add($event);
-
-        $response = response($this->calendar->render(), 200);
-        $response->header('Content-Type', 'text/calendar; charset=utf-8');
-        $response->header('Content-Disposition', 'attachment; filename="'.$event->slug.'.ics"');
-
-        return $response;
     }
 }
