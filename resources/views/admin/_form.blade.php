@@ -27,11 +27,7 @@
         </div>
         {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
         <hr>
-        {!! BootForm::textarea(__('Example'), 'example')->addClass('ckeditor-full')->value(' <img src="/project/images/aboutpic1.png" alt="">
-        <br>
-        <p>
-            東聖機械是台灣專業自動化工具機貿易商之一，代理多家台灣和日本知名設備工具機及自動化元件， 至今已邁入30 年，代理之日本傳動和連桿之汽機車, 精密零部件（洗切削、內外徑平面鏡面和汽缸研磨等），金屬機械加工生產設備供應商，及精密減速機（微型）齒輪、螺桿、軸承模具等機械加工自動化生產設備（車床、銑床、鑽孔攻牙、磨床、拉床等），及多家日本原材料、試驗機檢測設備裝置，超音波、渦流探傷、X光設限等各式無損探傷檢出設備，產品線繁不及備載。
-        </p>')->disable() !!}
+        {!! BootForm::textarea(__('Example'), 'example')->addClass('ckeditor-full')->value('')->disable() !!}
     </div>
     <div class="tab-pane fade" id="tab-meta">
         {!! TranslatableBootForm::text(__('Meta title'), 'meta_title') !!}
