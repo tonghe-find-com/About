@@ -10,7 +10,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Tonghe\\Modules\\Abouts\\": "src/"
+            "TypiCMS\\Modules\\Abouts\\": "src/"
         }
     },
     "minimum-stability": "dev",

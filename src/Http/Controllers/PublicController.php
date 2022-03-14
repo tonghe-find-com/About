@@ -1,10 +1,10 @@
 <?php
 
-namespace Tonghe\Modules\Abouts\Http\Controllers;
+namespace TypiCMS\Modules\Abouts\Http\Controllers;
 
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use Tonghe\Modules\Abouts\Models\About;
+use TypiCMS\Modules\Abouts\Models\About;
 
 class PublicController extends BasePublicController
 {

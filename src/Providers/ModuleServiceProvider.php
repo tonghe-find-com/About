@@ -1,14 +1,14 @@
 <?php
 
-namespace Tonghe\Modules\Abouts\Providers;
+namespace TypiCMS\Modules\Abouts\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use Tonghe\Modules\Abouts\Composers\SidebarViewComposer;
-use Tonghe\Modules\Abouts\Facades\Abouts;
-use Tonghe\Modules\Abouts\Models\About;
+use TypiCMS\Modules\Abouts\Composers\SidebarViewComposer;
+use TypiCMS\Modules\Abouts\Facades\Abouts;
+use TypiCMS\Modules\Abouts\Models\About;
 
 class ModuleServiceProvider extends ServiceProvider
 {

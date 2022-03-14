@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonghe\Modules\Abouts\Models;
+namespace TypiCMS\Modules\Abouts\Models;
 
 use App\HasList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +10,7 @@ use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
-use Tonghe\Modules\Abouts\Presenters\ModulePresenter;
+use TypiCMS\Modules\Abouts\Presenters\ModulePresenter;
 
 class About extends Base
 {

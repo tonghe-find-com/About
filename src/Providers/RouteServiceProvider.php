@@ -1,14 +1,14 @@
 <?php
 
-namespace Tonghe\Modules\Abouts\Providers;
+namespace TypiCMS\Modules\Abouts\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use Tonghe\Modules\Abouts\Http\Controllers\AdminController;
-use Tonghe\Modules\Abouts\Http\Controllers\ApiController;
-use Tonghe\Modules\Abouts\Http\Controllers\PublicController;
+use TypiCMS\Modules\Abouts\Http\Controllers\AdminController;
+use TypiCMS\Modules\Abouts\Http\Controllers\ApiController;
+use TypiCMS\Modules\Abouts\Http\Controllers\PublicController;
 
 class RouteServiceProvider extends ServiceProvider
 {
